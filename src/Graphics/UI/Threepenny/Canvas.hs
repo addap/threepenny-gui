@@ -11,7 +11,7 @@ module Graphics.UI.Threepenny.Canvas (
     , linearGradient, horizontalLinearGradient, verticalLinearGradient
     , fillRect, fillStyle, strokeStyle, lineWidth, textFont
     , TextAlign(..), textAlign
-    , beginPath, moveTo, lineTo, closePath, arc, arc'
+    , beginPath, moveTo, lineTo, setLineDash, closePath, arc, arc'
     , fill, stroke, fillText, strokeText
     ) where
 
@@ -200,6 +200,10 @@ moveTo (x,y) canvas =
 lineTo :: Point -> Canvas -> UI()
 lineTo (x,y) canvas =
   runFunction $ ffi "%1.getContext('2d').lineTo(%2, %3)" canvas x y
+
+setLineDash :: [Double] -> Canvas -> UI()
+setLineDash segments canvas =
+  runFunction $ ffi "%1.getContext('2d').setLineDash(%2)" canvas segments
 
 -- | Draw a straight line from the current point to the start of the
 -- path. If the shape has already been closed or has only one point,
