@@ -5,6 +5,9 @@ module Graphics.UI.Threepenny.Attributes (
     -- * Input elements
     checked, selection, enabled,
 
+    -- * CSS
+    display,
+
     -- * HTML attributes
     action, align, alink, alt, altcode, archive,
     background, base, bgcolor, border, bordercolor,
@@ -42,6 +45,13 @@ selection = fromJQueryProp "selectedIndex" from (JSON.toJSON . maybe (-1) id)
     from s = let JSON.Success x = JSON.fromJSON s in
         if x == -1 then Nothing else Just x
 
+{-----------------------------------------------------------------------------
+    CSS
+------------------------------------------------------------------------------}
+
+-- | Display attribute of an element. "none" to hide it and "block" to show it
+display :: Attr Element String
+display = fromObjectProperty "style.display"
 
 {-----------------------------------------------------------------------------
     HTML atributes
