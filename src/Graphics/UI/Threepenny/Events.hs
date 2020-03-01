@@ -3,7 +3,7 @@ module Graphics.UI.Threepenny.Events (
     -- | Events on DOM elements.
 
     -- * Convenience events
-    valueChange, selectionChange, checkedChange,
+    valueChange, selectionChange, selectionChangeValue, checkedChange,
 
     -- * Standard DOM events
     click, contextmenu, mousemove, mousedown, mouseup,
@@ -29,6 +29,10 @@ unsafeMapUI el f = unsafeMapIO (\a -> getWindow el >>= \w -> runUI w (f a))
 -- | Event that occurs when the /user/ changes the selection of a @<select>@ element.
 selectionChange :: Element -> Event (Maybe Int)
 selectionChange el = unsafeMapUI el (const $ get selection el) (click el)
+
+-- | Event that occurs when the /user/ changes the selection of a @<select>@ element.
+selectionChangeValue :: Element -> Event String
+selectionChangeValue el = unsafeMapUI el (const $ get value el) (click el)
 
 -- | Event that occurs when the /user/ changes the checked status of an input
 -- element of type checkbox.
